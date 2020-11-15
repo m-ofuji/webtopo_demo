@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <head>
+    <title>トポ管理</title>
+    <!-- Required meta tags always come first -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <!-- jQuery 読み込み -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <!-- semantic.css 読み込み --> 
+    <link href='/public/assets/plugin/semanticui/semantic.min.css' rel='stylesheet' />
+    <script src='/public/assets/plugin/semanticui/semantic.min.js'></script>
+
+    <style type="text/css">
+    body {
+      background-color: #eeeeee;
+      padding-top: 20%;
+    }
+    .ui.segment {
+      width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    @media only screen and (max-width: 700px) {
+      body {
+        background-color: #eeeeee;
+        padding-top: 40%;
+      }
+      body > .grid {
+        height: 100%;
+      }
+      .image {
+        margin-top: -100px;
+      }
+      .ui.segment {
+        width: initial;
+      }
+    }
+    </style>
+    <meta name="robots" content="noindex,nofollow"/>
+  </head>
+  <body>
+    <div class="ui middle aligned center aligned container">
+      <div class="column">
+        <h2 class="ui teal image header">
+          <div class="content">
+            トポ管理
+          </div>
+        </h2>
+        <form class="ui large form" action="/index.php/admin/login/login" method="post">
+          <div class="ui segment">
+            <div class="field">
+              <div class="ui left icon input">
+                <i class="user icon"></i>
+                <input type="username" name="username" placeholder="ユーザーID">
+              </div>
+            </div>
+            <div class="field">
+              <div class="ui left icon input">
+                <i class="lock icon"></i>
+                <input type="password" name="password" placeholder="パスワード">
+              </div>
+            </div>
+            <p class="ui red header">{{error}}</p>
+            <button class="ui fluid large teal button" type="submit">ログイン</button>
+          </div>
+          <div class="ui error message"></div>
+        </form>
+        <a href="/index.php/session">利用者向けトポはこちら</a>
+      </div>
+    </div>
+  </body>
+</html>

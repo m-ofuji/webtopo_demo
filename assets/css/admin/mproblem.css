@@ -1,0 +1,5 @@
+.ui.card .swiper-slide .problem-thumb {
+  width: 100%!important;
+  height: 300px;
+  object-fit: cover;
+}

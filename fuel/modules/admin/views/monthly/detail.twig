@@ -1,0 +1,161 @@
+  {# <div class="ui teal segment form-segment"> #}
+    <div class="ui text container post-problem" >
+      <a id="return" class="ui mini right floated basic blue button" href="/index.php/admin/monthly">
+        <i class="ui reply icon"></i> 
+        戻る
+      </a>
+      <h4 class="ui dividing header">マンスリー管理</h4>
+      <div id="error-message" class="ui red message hidden">
+        <div class="header">
+            入力に誤りがあります
+        </div>
+        <ul id="error-list" class="list">
+        </ul>
+      </div>
+      <form id="input-form" class="ui form" action="/index.php/admin/monthly/register" method="post" enctype="multipart/form-data">
+        <input name="csrf_token" type="hidden" value="{{csrf_token}}"/>
+        <div class="seven wide field">
+          <label>マンスリー月</label>
+          <div class="two fields year-month-fields">
+            <div class="field">
+              <div class="ui fluid selection {% if year %}disabled{% endif %} dropdown">
+                <input type="hidden" name="year" value="{{year}}">
+                <i class="dropdown icon"></i>
+                <div class="default text">年</div>
+                <div class="menu">
+                  <div class="item year" data-value="2020">2020年</div>
+                  <div class="item year" data-value="2021">2021年</div>
+                </div>
+              </div>
+            </div>
+            <div class="field">
+              <div class="ui fluid selection {% if year %}disabled{% endif %} dropdown">
+                <input type="hidden" name="month" value="{{month}}">
+                <i class="dropdown icon"></i>
+                <div class="default text">月</div>
+                <div class="menu">
+                  {% for m in get_codes('months') %}
+                  <div class="item month" data-value="{{m.code}}">{{m.name}}</div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="publishing">ステータス</label>
+          <div class="inline fields">
+            {% for p in get_codes('publishing') %}
+            <div class="ui radio checkbox input-checkbox {% if publishing == p.code %}checked{% elseif month <= 0 and p.code == 0 %}checked{% endif %}" name="publishing" value="{{p.code}}">
+              <input type="radio" name="publishing" class="hidden" value="{{p.code}}">
+              <label>{{p.name}}</label>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="sixteen wide field">
+          <label>課題リスト<span style="float:right;">あと{% if year_month %}{{problem_num - cnt}}{% else %}15{% endif %}課題</span></label>
+          <div class="field">
+            <div class="ui horizontal segments">
+              <div class="ui center aligned segment">
+                <p>垂壁</p>
+                <p>{% if year_month %}{{v_cnt}}{% else %}0{% endif %}課題</p>
+              </div>
+              <div class="ui center aligned segment">
+                <p>北壁</p>
+                <p>{% if year_month %}{{n_cnt}}{% else %}0{% endif %}課題</p>
+              </div>
+              <div class="ui center aligned segment">
+                <p>どっかぶり</p>
+                <p>{% if year_month %}{{d_cnt}}{% else %}0{% endif %}課題</p>
+              </div>
+            </div>
+            
+            <div class="ui segment">
+              <div id="problem-list" class="ui relaxed ordered divided list">
+              {# <div id="problem-list" class="ui relaxed ordered divided list StackedList StackedList--hasScroll"> #}
+                {% for key, p in problems %}
+                <div class="item monthly-list-item" pid="{{p.id}}">
+                  <div class="content">
+                    {% if p.id != 0 %}
+                    <div class="ui accordion">
+                      <div class="title">
+                        <div class="description">
+                          <div class="header">課題名：{{p.name}}</div>
+                          <div class="content">設定者：{{p.setter}}</div>
+                          <div class="floated centered ui {{p.grade_color}} label problem-card-grade">
+                            {{p.grade_name}}
+                          </div>
+                          <div class="floated centered ui basic teal label problem-card-grade">
+                            {{p.wall_name}}
+                          </div>
+                          <a class="ui show-comment"  id="{{p.id}}" name="{{p.name}}" >
+                            <i class="large {% if p.comments > 0 %}comments blue{% else %}comment outline grey{% endif %} icon"></i>
+                          </a>
+                          <a class="remove-problem" id="{{p.id}}" name="{{p.name}}" setter="{{p.setter}}" grade_color="{{p.grade_color}}" grade_name="{{p.grade_name}}" wall_name="{{p.wall_name}}" img="{{p.img}}" imgs="{{p.imgs|join(', ')}}" comments="{{p.comments}}">
+                            <i class="times circle outline right floated large grey icon"></i>
+                          </a>
+                        </div>
+                      </div>
+                      <div class="content">
+                        <div class="swiper-container">
+                          <div class="swiper-wrapper">
+                          {% for i in p.imgs %}
+                            <a class="swiper-slide problem-image" images="{{i}}">
+                              <img class="problem-thumb" src="/public/assets/image/problem/{{i}}">
+                            </a>
+                          {% endfor %}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    {% else %}
+                    <div class="ui primary basic button monthly-select">課題を選択する</div>
+                    {% endif %} 
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ui hidden divider">
+          <label id="validation" class="ui right floated teal button" style="margin-bottom: 30px;">
+            <i class="ui send icon"></i> 
+            登録
+          </label>
+        </div>
+      </form>
+    </div>
+  {# </div> #}
+
+  <div id="register-modal" class="ui mini test modal">
+    <div class="header">
+      マンスリー登録
+    </div>
+    <div class="content">
+      <p>マンスリーを登録してよろしいですか</p>
+    </div>
+    <div class="actions">
+      <div class="ui two buttons">
+        <button class="ui red button close-modal">いいえ</button>
+        <button id="register" class="ui teal button close-modal">はい</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="monthly-stock" class="popup js-popup">
+    <div class="popup-inner scrollable">
+      <div class="ui segment">
+        <h5 id="monthly-stock-header" class="ui dividing header">課題選択</h5>
+      </div>
+    </div>
+    <div class="black-background close-modal" id="js-black-bg"></div>
+  </div>
+  <div class="ui dimmer">
+    <div class="ui loader"></div>
+  </div>
+
+  {{comment}}

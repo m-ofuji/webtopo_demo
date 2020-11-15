@@ -1,0 +1,68 @@
+<div id="search-form" class="popup js-popup">
+  <div class="popup-inner">
+    <div class="ui segment">
+      <div id="search-form" class="ui form search-modal">
+        <div class="field">
+          <label>課題名</label>
+          <input class="search-condition" type="text" name="name" col="name" operator="like" val="{{name.val}}">
+        </div>
+        <div class="field">
+          <label>設定者</label>
+          <input class="search-condition" type="text" name="setter" col="setter" operator="like" value="{{setter.val}}">
+        </div>
+        <div class="field">
+          <label for="ca">作成日</label>
+          <div class="field">
+            <div class="ui radio checkbox search-checkbox" name="one_week" col="c_at" operator="greater" val="{{one_week}}">
+              <input type="radio" name="c_at" data-value="ow" class="hidden">
+              <label>最近1週間</label>
+            </div>
+            <div class="ui radio checkbox search-checkbox" name="one_month" col="c_at" operator="greater" val="{{one_month}}">
+              <input type="radio" name="c_at" data-value="om" class="hidden">
+              <label>最近1カ月</label>
+            </div>
+            <div class="ui radio checkbox search-checkbox search-checkbox-all checked">
+              <input type="radio" name="c_at" class="hidden">
+              <label>すべて</label>
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label>グレード</label>
+          <div class="ui fluid multiple selection dropdown dropdown-grade search-dropdown" name="grade" col="grade" operator="in" val="{{grade.val}}">
+            <i class="dropdown icon"></i>
+            <div class="default text"></div>
+            <div class="menu">
+              {% for g in get_grades() %}
+                <div class="item" val="{{g.code}}" data-value="{{g.code}}">
+                  <div class="ui {{g.color}} label">
+                    {{g.name}}
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label>ウォール</label>
+          <div class="ui fluid multiple selection dropdown search-dropdown" name="wall" col="wall" operator="in" val="{{wall.val}}">
+            <i class="dropdown icon"></i>
+            <div class="default text"></div>
+            <div class="menu">
+              {% for w in get_codes('wall') %}
+                <div class="item" val="{{w.code}}" data-value="{{w.code}}">
+                  <div class="ui teal basic label">
+                    {{w.name}}
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+        <div id="search" class="right floated ui teal button">絞り込み</div>
+        <div id="clear" class="ui button">クリア</div>
+      </div>
+    </div>
+  </div>
+  <div class="black-background close-modal" id="js-black-bg"></div>
+</div>

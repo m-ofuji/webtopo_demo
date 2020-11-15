@@ -1,0 +1,46 @@
+    <div class="ui text container post-problem">
+      <a id="return" class="ui mini right floated basic blue button" href="/index.php/admin/problem">
+        <i class="ui reply icon"></i> 
+        戻る
+      </a>
+      <h4 class="ui dividing header">パスワード変更</h4>
+      <div id="error-message" class="ui red message hidden">
+        <div class="header">
+            入力に誤りがあります
+        </div>
+        <ul id="error-list" class="list">
+        </ul>
+      </div>
+      <form id="input-form" class="ui form" action="/index.php/admin/pass/register" method="post" enctype="multipart/form-data">
+        <input name="id" type="hidden" value="{{id}}"/>
+        <input name="csrf_token" type="hidden" value="{{csrf_token}}"/>
+        <div class="twelve wide field">
+          <label>新パスワード</label>
+          <input type="password" name="pass" value="" maxlength="20">
+          <div class="count">20</div>
+        </div>
+        <div class="twelve wide field">
+          <label>新パスワード（確認）</label>
+          <input type="password" name="pass_confirmation" value="" maxlength="20">
+          <div class="count">20</div>
+        </div>
+        <div class="ui hidden divider"></div>
+        <label id="validation" class="ui right floated teal button" style="margin-bottom: 30px;">
+          <i class="ui send icon"></i> 
+          変更
+        </label>
+      </form>
+    <div id="register-modal" class="ui mini test modal">
+      <div class="header">
+        パスワード変更
+      </div>
+      <div class="content">
+        <p>パスワードを変更してよろしいですか</p>
+      </div>
+      <div class="actions">
+        <div class="ui two buttons">
+          <button class="ui red button close-modal">いいえ</button>
+          <button id="register" class="ui teal button close-modal">はい</button>
+        </div>
+      </div>
+    </div>

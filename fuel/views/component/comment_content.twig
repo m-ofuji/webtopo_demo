@@ -1,0 +1,18 @@
+{% if comments|length > 0 %}
+{% for c in comments %}
+<div class="ui feed">
+  <div class="event">
+    <div class="content">
+      <div class="summary">
+        <div>{{c.created_by}}<span class="ui right floated date comment-date">{{c.create_at}}</span></div>
+      </div>
+      <div class="extra text comment-text">
+        {{c.comment}}
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+{% else %}
+<div class='no-comment'>コメントはありませんでした。</div>
+{% endif %}

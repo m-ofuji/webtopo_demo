@@ -1,0 +1,6 @@
+#cnvs {
+    width: 100vw;
+    height: auto;
+    min-height: 100vh;
+    border:1px solid #aaa;
+}

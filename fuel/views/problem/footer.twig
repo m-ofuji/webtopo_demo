@@ -1,0 +1,40 @@
+<div id="fixed-footer">
+  <div class="ui center aligned segment {% if is_monthly%}scrollable{% endif %}">
+    <div>
+      {% if is_monthly == false %}
+      <div id="open-search-form" class="ui teal button">
+        <i class="search icon"></i>
+        検索
+      </div>
+      {% endif %}
+      {% if is_monthly %}
+      <div id="select-month" class="ui secondary menu">
+        {% for m in months %}
+        <a class="item search-item month-select {% if loop.index == 1 %}active{% endif %}" name="year_month" col="year_month" operator="equal" val="{{m.year_month}}">{{m.year}}年{{m.month}}月</a>
+        {% endfor %}
+      </div>
+      {# <div id="select-month" class="ui teal dropdown button input-dropdown search-dropdown" name="year_month" col="year_month" operator="equal" val="{{year_month.val}}">
+        <i class="sort icon"></i>
+          マンスリー月
+        <div class="menu">
+          {% for m in months %}
+          <div class="item" val="{{m.year_month}}" data-value="{{m.year_month}}">{{m.year}}年{{m.month}}月</div>
+          {% endfor %}
+        </div>
+      </div> #}
+      {% else %}
+      <div id="sort-order" class="ui teal dropdown button">
+        <i class="sort icon"></i>
+        並び替え
+        <div class="menu">
+          <div class="item dropdown-sort" sort="created_at" order="desc">新しい順</div>
+          <div class="item dropdown-sort" sort="created_at" order="asc">古い順</div>
+          <div class="item dropdown-sort" sort="grade" order="desc">難しい順</div>
+          <div class="item dropdown-sort" sort="grade" order="asc">易しい順</div>
+        </div>
+      </div>
+      {% endif %}
+      {# <a class="ui teal button" href="/index.php/admin/{% if is_monthly %}m{% endif %}problem/detail ">新規作成</a> #}
+    </div>
+  </div>
+</div>

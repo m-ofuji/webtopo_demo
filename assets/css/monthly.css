@@ -1,0 +1,23 @@
+.ui.card .swiper-slide .problem-thumb {
+  width: 100%!important;
+  height: 300px!important;
+  object-fit: cover;
+}
+
+#fixed-footer .scrollable {
+  overflow-y: scroll;
+  -ms-overflow-style: none;    /* IE, Edge 対応 */
+  scrollbar-width: none;       /* Firefox 対応 */
+}
+#fixed-footer .scrollable::-webkit-scrollbar {  /* Chrome, Safari 対応 */
+  display:none;
+}
+
+.month-select.active {
+  background-color: #00b5ad!important;
+  color: #ffffff!important;
+}
+
+.month-select {
+  background-color: #eeeeee!important;
+}

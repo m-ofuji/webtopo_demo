@@ -1,0 +1,25 @@
+{{asset_js('msg_history.js')}}
+<SCRIPT language="JavaScript">
+  const ms = 3;
+  window.setTimeout('openPage()', ms * 1000);
+
+  const openPage = function() {
+    let url = document.getElementById('pageUrl').value;
+    location.href = url;
+  }
+</SCRIPT>
+
+<input id="pageUrl" value="/{{redirect_to}}" type="hidden">
+<div class="ui container">
+  <div class="ui large icon {% if result %}teal{% else %}red{% endif %} message">
+    <i class="{% if result %}check circle{% else %}exclamation circle{% endif %} icon"></i>
+    <div class="content">
+      <h3 class="header">
+        {{message|escape|replace({'¥n':'<br />'}) }}
+      </h3>
+      <p>※3秒後にページ遷移します。</p>
+    </div>
+  </div>
+</div>
+
+

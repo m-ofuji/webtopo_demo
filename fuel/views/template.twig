@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Webトポ</title>
+    <!-- Required meta tags always come first -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <!-- jQuery 読み込み -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <!-- semantic.css 読み込み --> 
+    <link href='/public/assets/plugin/semanticui/semantic.min.css' rel='stylesheet' />
+    <script src='/public/assets/plugin/semanticui/semantic.min.js'></script>
+    <link href='/public/assets/plugin/semanticui/components/dropdown.min.css' rel='stylesheet' />
+    <script src='/public/assets/plugin/semanticui/components/dropdown.min.js'></script>
+    
+    <!-- hamburgerメニュー -->
+    <link href="/public/assets/plugin/hamburgers-master/dist/hamburgers.css" rel="stylesheet">
+
+    <!-- swiper 読み込み -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/5.4.5/css/swiper.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/5.4.5/js/swiper.min.js"></script>
+
+    <!-- AOS 読み込み -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <!-- fulcalender読み込み -->
+    <link href='/public/assets/plugin/fullcalendar-4.4.0/packages/core/main.min.css' rel='stylesheet' />
+    <link href='/public/assets/plugin/fullcalendar-4.4.0/packages/daygrid/main.min.css' rel='stylesheet' />
+    <script src='/public/assets/plugin/fullcalendar-4.4.0/packages/core/main.min.js'></script>
+    <script src='/public/assets/plugin/fullcalendar-4.4.0/packages/daygrid/main.min.js'></script>
+    <script src='/public/assets/plugin/fullcalendar-4.4.0/packages/core/locales/ja.js'></script>
+
+    <script src="/public/assets/plugin/momentjs/moment.min.js"></script>
+
+    {# <link href="/public/assets/plugin/fancybox/jquery.fancybox.min.css" rel="stylesheet" />
+    <script src="/public/assets/plugin/fancybox/jquery.fancybox.min.js"></script> #}
+
+
+    <!-- lightbox読み込み -->
+    {# <link href="/public/assets/plugin/lightbox/css/lightbox.min.css" rel="stylesheet" />
+    <script src="/public/assets/plugin/lightbox/js/lightbox.min.js"></script> #}
+
+    <!-- assets 読み込み -->
+    {{asset_css('app.css')}}
+    {% if asset_get_file(controller ~ '.css', 'css')%}{{asset_css(controller ~ '.css')}}{% endif %}
+
+  </head>
+  <body class="pushable">
+
+    {{menu}}
+
+    <div class="pusher">
+      {{header}}
+
+      {{hamburger}}
+
+      {{content}}
+
+      {{footer}}
+
+    </div>
+
+    {{asset_js('app.js')}}
+    {% if asset_get_file(controller ~ '.js', 'js')%}{{asset_js(controller ~ '.js')}}{% endif %}
+    {% if controller == 'session' or controller == 'monthly'%}{{asset_js('problembase.js')}}{% endif %}
+
+  </body>
+
+</html>

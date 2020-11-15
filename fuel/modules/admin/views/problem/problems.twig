@@ -1,0 +1,66 @@
+{% for p in problems %}
+<div class="column">
+  <div class="ui card">
+    <div class="image">
+      <div class="swiper-container">
+        <div class="swiper-wrapper">
+        {% for i in p.imgs %}
+          <a class="swiper-slide problem-image" images="{{i}}">
+            <img class="problem-thumb" src="/public/assets/image/problem/{{i}}">
+          </a>
+        {% endfor %}
+        </div>
+      </div>
+    </div>
+    <div class="content">
+      <div class="content">
+        <div class="right floated centered ui large {{p.grade_color}} label">
+          {{p.grade_name}}
+        </div>
+        <div class="header problem-card-title">
+          {{p.name}}
+        </div>
+      </div>
+      <div class="content problem-content">
+        <div class="right floated centered ui large teal basic label">
+          {{p.wall_name}}
+        </div>
+        <div class="meta">
+          {% if is_monthly %}
+          {% if p.year %}
+          {{p.year}}年{{p.month}}月　{{p.monthly_order}}番
+          {% else %}
+          年月未指定
+          {% endif %}
+          {% else %}
+          <span class="date problem-card-date">{{p.created_at}}（{{p.publishing_name}}）</span>
+          {% endif %}
+        </div>
+        <div class="description"> 
+          設定者：{{p.setter}}
+        </div>
+      </div>
+    </div>
+    <div class="extra content">
+      {# <div class="ui checkbox">
+        <input type="checkbox" name="example">
+        <label>選択</label>
+      </div> #}
+      {# {% if controller == 'admin\\problem' %} #}
+      <a class="move-problem" problem-id="{{p.id}}">
+        <span class="left floated">
+          <i class="external alternate large grey icon"></i>
+          <label>移動</label>
+        </span>
+      </a>
+      {# {% endif %} #}
+      <a href="/index.php/{{controller}}/detail/{{p.id}}">
+        <span class="right floated comment">
+          <i class="edit large icon"></i>
+          <label>編集</label>
+        </span>
+      </a>
+    </div>
+  </div>
+</div>
+{% endfor %}

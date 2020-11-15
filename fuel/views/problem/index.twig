@@ -1,0 +1,15 @@
+<input id="sort" type="hidden" value="{% if is_monthly %}monthly_order{% else %}created_at{% endif %}" />
+<input id="order" type="hidden" value="{% if is_monthly %}asc{% else %}desc{% endif %}" />
+<input id="offset" type="hidden" value="0" />
+
+<div id="main-grid" class="ui three column doubling stackable grid problem-grid"></div>
+
+<div class="ui center aligned grid more-grid">
+  <div class="eight wide column">
+    <div id="show-more" class="ui center aligned blue basic button">もっと見る</div>
+  </div>
+</div>
+
+{{search_form}}
+
+{{image_popup}}

@@ -1,0 +1,31 @@
+<input id="sort" type="hidden" value="created_at" />
+<input id="order" type="hidden" value="desc" />
+<input id="offset" type="hidden" value="0" />
+
+<div id="main-grid" class="ui three column doubling stackable grid problem-grid">
+</div>
+
+{# <div class="ui center aligned primary basic button">もっと見る</div> #}
+
+<div class="ui center aligned grid more-grid">
+  <div class="eight wide column">
+    <div id="show-more" class="ui center aligned blue basic button">もっと見る</div>
+  </div>
+</div>
+
+{{search_form}}
+
+<div id="move-modal" class="ui mini test modal">
+  <div class="header">
+    {% if is_monthly %}セッション{% else %}マンスリー{% endif %}へ移動
+  </div>
+  <div class="content">
+    <p>課題を{% if is_monthly %}セッション{% else %}マンスリー{% endif %}へ移動してよろしいですか</p>
+  </div>
+  <div class="actions">
+    <div class="ui two buttons">
+      <button class="ui red button close-modal">いいえ</button>
+      <button id="move" class="ui teal button close-modal">はい</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+<div class="ui cards">
+{% for m in months %}
+  <a class="ui fluid card" href="/index.php/admin/monthly/detail/{{m.year_month}}">
+    <div class="content">
+      <div class="ui left floated large {{m.progress_color}} label problem-cnt">
+        {{m.cnt}}
+      </div>
+      <div class="ui right floated {% if m.publishing > 0 %}blue{% else %}gray{% endif %} large label">
+        {{m.is_published}}
+      </div>
+      <div class="header">
+        {{m.year}}年{{m.month}}月
+      </div>
+      <div class="meta">
+        残り{{m.problem_num - m.cnt}}課題
+      </div>
+    </div>
+  </a>
+{% endfor %}
+</div>

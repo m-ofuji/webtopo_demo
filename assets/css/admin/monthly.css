@@ -1,0 +1,79 @@
+/* .ui.loader {
+  top: 30%!important;
+} */
+
+/* .ui.grid>* {
+  padding-left: 0!important;
+} */
+
+.remove-problem .times.circle.outline {
+  margin-left:0px!important;
+}
+
+.grade-tab {
+  overflow-y: scroll;
+  -ms-overflow-style: none;    /* IE, Edge 対応 */
+  scrollbar-width: none;       /* Firefox 対応 */
+}
+.grade-tab::-webkit-scrollbar {  /* Chrome, Safari 対応 */
+  display:none;
+}
+
+.year-month-fields {
+  flex-wrap: inherit!important;
+  display: -webkit-box!important;
+}
+
+.grade-buttons {
+  margin-top: 10px!important;
+}
+
+#monthly-stock {
+  /* text-align: center; */
+  padding: 10px;
+  max-height: 90%;
+}
+
+.monthly-list-item {
+  background-color: #fff;
+  padding-right: 10px!important;
+}
+
+.problem-cnt {
+  margin-right: 10px!important;
+}
+
+.monthly-card-content {
+  margin-left: 10px;
+}
+
+#search-box {
+  align-content: center;
+  position: fixed;
+  top: 15px;
+  /* margin: ; */
+  /* right: 75%; */
+  /* right: 20px;
+  padding-left: 3px; */
+  /* padding-top: -1px;
+  display: inline-block;
+  text-decoration: none; */
+  background: #fff;
+  /* color: #FFF;
+  width: 65px;
+  height: 65px;
+  line-height: 65px;
+  border-radius: 50%;
+  text-align: center;
+  overflow: hidden;
+  transition: .4s; */
+}
+
+#problem-list {
+  max-height: 500px; 
+  overflow-y: scroll;
+}
+
+/* #main-grid {
+  margin-top: 130px!important;
+} */

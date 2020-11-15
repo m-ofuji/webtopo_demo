@@ -1,0 +1,125 @@
+  {# <div class="ui teal segment form-segment"> #}
+    <div class="ui text container post-problem">
+      <a id="return" class="ui mini right floated inverted blue button" href="/index.php/admin/problem">
+        <i class="ui reply icon"></i> 
+        戻る
+      </a>
+      <h4 class="ui dividing header">課題投稿</h4>
+      <div id="error-message" class="ui red message hidden">
+        <div class="header">
+            入力に誤りがあります
+        </div>
+        <ul id="error-list" class="list">
+        </ul>
+      </div>
+      <form id="input-form" class="ui form" action="/index.php/{{controller}}/register" method="post" enctype="multipart/form-data">
+        <input name="id" type="hidden" value="{{id}}"/>
+        <input name="images[]" type="hidden" value="{{img}}"/>
+        <div class="field">
+          <label for="problem-image">課題画像</label>
+          <img id="preview" class="ui left aligned big image" {% if img %}src="/public/assets/image/problem/{{img}}"{% endif %} />
+          <div class="six wide column">
+            <label  class="ui small yellow button">
+              <input class="problem-image inputfile" type="file" accept="image/*" />
+              <i class="ui upload icon"></i> 
+              画像追加
+            </label>
+          </div>
+        </div>
+        <div class="twelve wide field">
+          <label>課題名</label>
+          <input type="text" name="name" value="{{name}}" maxlength="20">
+          <div class="count">20</div>
+        </div>
+        <div class="twelve wide field">
+          <label>設定者</label>
+          <input type="text" name="setter" value="{{setter}}" maxlength="20">
+          <div class="count">20</div>
+        </div>
+        <div class="eight wide field">
+          <label>グレード</label>
+          <div class="ui fluid selection dropdown">
+            <i class="dropdown icon"></i>
+            <div class="default text">
+            {% if grade %}
+              <div class="ui {{grade_color}} label">
+                {{grade_name}}
+              </div>
+            {% endif %}
+            </div>
+            <div class="menu">
+            {% for g in get_grades() %}
+              <div class="item input-dropdown {% if grade == g.code %}active selected{% endif %}" name="grade" value="{{g.code}}">
+                <div class="ui {{g.color}} label">
+                  {{g.name}}
+                </div>
+              </div>
+            {% endfor %}
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label for="wall">ウォール</label>
+          <div class="inline fields">
+            {% for w in get_codes('wall') %}
+            <div class="ui radio checkbox input-checkbox {% if wall == w.code %}checked{% endif %}" name="wall" value="{{w.code}}">
+              <input type="radio" name="wall" class="hidden">
+              <label>{{w.name}}</label>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+        <div class="field">
+          <label for="publishing">ステータス</label>
+          <div class="inline fields">
+            {% for p in get_codes('publishing') %}
+            <div class="ui radio checkbox input-checkbox {% if publishing == p.code %}checked{% endif %}" name="publishing" value="{{p.code}}">
+              <input type="radio" name="publishing" class="hidden">
+              <label>{{p.name}}</label>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+        <div class="ui hidden divider"></div>
+        <label id="validation" class="ui right floated teal button"  style="margin-bottom: 30px;">
+          <i class="ui send icon"></i> 
+          投稿
+        </label>
+        {% if id %}
+        <label id="delete-confirmation" class="ui right floated red button">
+          <i class="ui trash alternate icon"></i> 
+          削除
+        </label>
+        {% endif %}
+      </form>
+    <div id="register-modal" class="ui mini test modal">
+      <div class="header">
+        課題投稿
+      </div>
+      <div class="content">
+        <p>課題を投稿してよろしいですか</p>
+      </div>
+      <div class="actions">
+        <div class="ui two buttons">
+          <button class="ui red button close-modal">いいえ</button>
+          <button id="register" class="ui teal button close-modal">はい</button>
+        </div>
+      </div>
+    </div>
+    {% if id %}
+    <div id="delete-modal" class="ui mini test modal">
+      <div class="header">
+        課題削除
+      </div>
+      <div class="content">
+        <p>課題を削除してよろしいですか</p>
+      </div>
+      <div class="actions">
+        <div class="ui two buttons">
+          <button class="ui red button close-modal">いいえ</button>
+          <button id="delete" class="ui teal button close-modal">はい</button>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+  {# </div> #}

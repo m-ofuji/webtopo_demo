@@ -1,0 +1,45 @@
+<div id="stock-list" order="">
+  <div class="ui secondary menu">
+    {% for key,item in stocks %}
+    <a class="item stock-item" data-tab="{{key}}">{{key}}</a>
+    {% endfor %}
+    {% if stocks|length <= 0 %}
+    <p>マンスリー課題のストックがありませんでした。</p>
+    {% endif %}
+  </div>
+  {% for key,item in stocks %}
+  <div class="ui tab stock-tab" data-tab="{{key}}">
+    <div class="ui relaxed divided list">
+    {% for p in item %}
+      <div class="item monthly-stock-item">
+        <div class="content">
+          <div class="ui accordion stock-accordion">
+            <div class="title">
+              <div class="description">
+                <div class="header">設定者：{{p.setter}}</div>
+                <div class="floated centered ui {{p.grade_color}} label problem-card-grade">
+                  {{p.grade_name}}
+                </div>
+                <div class="floated centered ui basic teal label problem-card-grade">
+                  {{p.wall_name}}
+                </div>
+                <div class="ui right floated basic primary button select-stock" id="{{p.id}}" setter="{{p.setter}}" color="{{p.grade_color}}" grade="{{p.grade_name}}" wall="{{p.wall_name}}" img="{{p.img}}">
+                  {# <i class="chevron circle right floated large grey icon"></i> #}
+                  <i class="circle plus icon"></i>
+                  選択
+                </div>
+              </div>
+            </div>
+            <div class="content">
+              <div class="ui image">
+                <img src="/public/assets/image/problem/{{p.img}}">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+    </div>
+  </div>
+  {% endfor %}
+</div>
