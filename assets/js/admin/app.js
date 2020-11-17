@@ -237,6 +237,7 @@ const showComment = function() {
   return false;
 };
 
+// 初期化
 $(document).ready(function() {
   initSearchDates();
 
@@ -288,36 +289,6 @@ $(document).ready(function() {
     $('input[type="text"],input[type="password"]').each((i, e) => {
       countLength($(e));
     });
-  }
-
-  // フォームデータ作成時
-  if ($('#input-form').length) {
-    // document.getElementById('input-form').addEventListener("formdata", function(e) {
-    //   const el = $('.input-checkbox.checked, .input-dropdown.active.selected');
-    //   // $('.input-checkbox.checked, .input-dropdown.active.selected').each(function(i, element) {
-    //   el.each(function(i, element) {
-    //     const name = $(element).attr('name');
-    //     e.formData.delete(name);
-    //     e.formData.append(name, $(element).attr('value'));
-    //   });
-    //   // alert(e);
-    //   // console.log(e);
-    // });
-
-    // document.getElementById('input-form').addEventListener("submit", function(e) {
-    //   e.preventDefault();
-    //   const formData = new FormData(document.getElementById('input-form'));
-    //   const el = $('.input-checkbox.checked, .input-dropdown.active.selected');
-    //   // $('.input-checkbox.checked, .input-dropdown.active.selected').each(function(i, element) {
-    //   el.each(function(i, element) {
-    //     const name = $(element).attr('name');
-    //     formData.delete(name);
-    //     formData.append(name, $(element).attr('value'));
-    //   });
-    //   formData.submit();
-    //   // alert(e);
-    //   // console.log(e);
-    // });
   }
 
   //humburger
