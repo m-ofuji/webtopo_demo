@@ -38,6 +38,11 @@ const onImageSelected = (e) => {
   //画像選択時
   const file = e.target.files[0];
 
+  if (!hasImageExtension(file)) {
+    alert('アップロードできるのは画像ファイルのみです。');
+    return;
+  }
+
   uploadFile(file, BASE_SEGMENT + '/upload', res => {
     if (res.res) {
       const prev = '<div class="prev-field">'
@@ -60,12 +65,17 @@ const onImageSelected = (e) => {
       }
       reader.readAsDataURL(file);
     } else {
-      alert('画像のアップロードに失敗しました');
+      alert('画像のアップロードに失敗しました。アップロードできるファイルサイズの上限は1Mバイトまでです。');
     }
   }, res => {
-    alert('画像のアップロードに失敗しました');
+    alert('画像のアップロードに失敗しました。アップロードできるファイルサイズの上限は1Mバイトまでです。');
   });
 };
+
+const hasImageExtension = (file) => {
+  const validExtensions = new RegExp('([^\s]+(\\.(jpg|jpeg|png|gif|tiff|bmp))$)', 'i');
+  return validExtensions.test(file.name);
+}
 
 const moveProblem = function() {
   const param = {

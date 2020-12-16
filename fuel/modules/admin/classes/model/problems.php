@@ -180,10 +180,15 @@ public $select =
         ,int2codename('publishing', publishing) publishing_name
         ,images
         @year_month
+        ,c.comment_count comments
         ,DATE_FORMAT(created_at, '%Y/%m/%d') created_at
         ,created_at c_at
         ,created_by
-    FROM @table
+    FROM @table p
+    LEFT JOIN (
+        SELECT  problem_id, COUNT(id) comment_count
+        FROM comments GROUP BY problem_id) c 
+    ON p.id = c.problem_id
 ) t
 SQL;
 

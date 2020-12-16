@@ -221,7 +221,8 @@ const showComment = function() {
   const order = $(this).closest('.monthly-list-item').index() + 1;
   const id = $(this).attr('id');
   const name = $(this).attr('name');
-  const header = 'No.' + order + '　課題名：' + name;
+  let header = order ? 'No.' + order + '　' : '';
+  header += '課題名：' + name;
   $('.comment-header').text(header);
   $('#comment-input').attr('problem_id', id);
   ajaxGetJson(false)(ROOT_PATH + 'comment/comments/' + id, {}, res => {
@@ -330,8 +331,8 @@ $(document).ready(function() {
   }
 
   $('.animation-top').addClass('loaded');
-
-  // コメント表示、追加
-  $('.show-comment').on('click', showComment);
-  $('.add-comment').on('click', registerComment);
 });
+
+// コメント表示、追加
+$('body').on('click', '.show-comment', showComment);
+$('body').on('click', '.add-comment', registerComment);

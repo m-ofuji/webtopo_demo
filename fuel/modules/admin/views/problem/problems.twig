@@ -42,22 +42,22 @@
       </div>
     </div>
     <div class="extra content">
-      {# <div class="ui checkbox">
-        <input type="checkbox" name="example">
-        <label>選択</label>
-      </div> #}
-      {# {% if controller == 'admin\\problem' %} #}
       <a class="move-problem" problem-id="{{p.id}}">
         <span class="left floated">
           <i class="external alternate large grey icon"></i>
           <label>移動</label>
         </span>
       </a>
-      {# {% endif %} #}
       <a href="/index.php/{{controller}}/detail/{{p.id}}">
         <span class="right floated comment">
           <i class="edit large icon"></i>
           <label>編集</label>
+        </span>
+      </a>
+      <a class="ui show-comment" id="{{p.id}}" name="{{p.name}}" >
+        <span class="right floated">
+          <i class="large {% if p.comments > 0 %}comments blue{% else %}comment outline grey{% endif %} icon"></i>
+          <label>コメント</label>
         </span>
       </a>
     </div>

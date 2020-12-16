@@ -3,3 +3,11 @@
   height: 300px;
   object-fit: cover;
 }
+
+.show-comment span {
+  margin-right: 10px;
+}
+
+.show-comment label {
+  color: rgba(0,0,0,.4);
+}

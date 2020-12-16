@@ -24,6 +24,7 @@ class Controller_ProblemBase extends Controller_Abstract
         $this->_header = \View_Twig::forge('problem/header', $param);
         $this->_footer = \View_Twig::forge('problem/footer', $param);
         $this->template->content = \View_Twig::forge('problem/index', $param);
+        $this->template->content->set('comment', \View_Twig::forge('component/comment'));
         $this->template->content->set('search_form', \View_Twig::forge('component/search_problem', $param));
     }
 
