@@ -3,3 +3,8 @@
   height: 300px;
   object-fit: cover;
 }
+
+.good span,
+.bad span {
+  margin-right: 20px!important;
+}

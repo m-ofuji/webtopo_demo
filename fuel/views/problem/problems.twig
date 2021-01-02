@@ -37,12 +37,23 @@
         </div>
       </div>
     </div>
-    {# <div class="extra content">
-      <div class="ui checkbox">
-        <input type="checkbox" name="example">
-        <label>選択</label>
-      </div>
-    </div> #}
+    {% if is_monthly %}
+    {% else %}
+    <div class="extra content">
+      <a class="ui good" val="g" pid="{{p.id}}">
+        <span class="left floated">
+          <i class="external alternate large thumbs up outline grey icon"></i>
+          <label class="value">{{p.good}}</label>
+        </span>
+      </a>
+      <a class="ui bad" val="b" pid="{{p.id}}">
+        <span class="left floated">
+          <i class="external alternate large thumbs down outline grey icon"></i>
+          <label class="value">{{p.bad}}</label>
+        </span>
+      </a>
+    </div>
+    {% endif %}
   </div>
 </div>
 {% endfor %}
