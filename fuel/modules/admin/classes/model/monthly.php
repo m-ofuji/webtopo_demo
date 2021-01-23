@@ -6,8 +6,6 @@ class Model_Monthly extends \Model_Abstract
     protected static $_tabel_name = 'months';
     protected static $_primary_key = 'id';
     protected static $_rules = array(
-        // 'year' => 'required',
-        // 'month' => 'required',
         'year_month' => 'required',
         'publishing' => 'required'
     );
@@ -19,7 +17,6 @@ class Model_Monthly extends \Model_Abstract
 
     public function getRecords(string $sort, string $order, array $where): array
     {
-        // $this->select->table = 'problem_stock';
         $result = \DB::select()
                     ->from(\DB::expr($this->select))
                     ->where(\Querybuilder::where($where))
@@ -126,16 +123,30 @@ SQL;
             $query->param('updated_by', $user);
             $res = $query->execute();
 
+            // 課題の順序を更新
             $problems = array_key_exists('problems', $input) ? $input['problems'] : array();
+            if (count($problems) > 0) {
+                $ids = [];
+                $orders = [];
+    
+                foreach ($problems as $key => $value) {
+                    $val = json_decode($value, true);
+                    if (is_numeric($val['id'])) {
+                        $ids[] = $val['id'];
+                    }
+                    if (is_numeric($val['order'])) {
+                        $orders[] = $val['order'];
+                    }
+                }
 
-            foreach ($problems as $key => $value) {
-                $val = json_decode($value, true);
-                $query = \DB::query($this->updateOrder);
-                $query->param('monthly_order', $val['order']);
-                $query->param('year_month', $yearMonth);
-                $query->param('publishing', $publishing);
-                $query->param('id', $val['id']);
-                $res = $query->execute();
+                if (count($ids) > 0 && count($ids) == count($orders)) {
+                    $query = \DB::query($this->updateOrder);
+                    $query->param('orders', \DB::expr(implode(',', $orders)));
+                    $query->param('year_month', $yearMonth);
+                    $query->param('publishing', $publishing);
+                    $query->param('ids', \DB::expr(implode(',', $ids)));
+                    $res = $query->execute();
+                }
             }
 
             \DB::commit_transaction();
@@ -171,7 +182,6 @@ SQL;
 (
     SELECT 
         m.year_month
-        -- ,CONCAT(SUBSTR(cast(m.year_month as char), 1, 4), '年', SUBSTR(cast(m.year_month as char), 5, 2), '月') ym
         ,SUBSTR(cast(m.year_month as char), 1, 4) year
         ,CAST(SUBSTR(cast(m.year_month as char), 5, 2) as signed) month
         ,m.problem_num
@@ -238,12 +248,12 @@ SQL;
 
 private $updateOrder = 
 <<<SQL
-UPDATE monthly_stock 
+UPDATE monthly_stock
 SET 
     `year_month` = :year_month
-    ,monthly_order = :monthly_order 
+    ,monthly_order = ELT(FIELD(id,:ids),:orders) 
     ,publishing = :publishing 
-WHERE id = :id;
+WHERE id IN (:ids)
 SQL;
 
 public $delete = 
